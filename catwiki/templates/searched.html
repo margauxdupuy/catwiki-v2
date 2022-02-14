@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%  block content %}
+
+<body class="bg-grey-lightest font-serif leading-normal tracking-normal">
+
+    <div class="container mx-auto p-8 md:p-16 mb-24">
+        <section>
+        <h1 class="text-lg font-bold my-8 ml-6">Top 10 most searched breeds</h1>
+        {% with most_searched_breeds as list %}
+        {% for breed in most_searched_breeds %}
+           <div class="flex flex-col md:flex-row my-20">
+               <img src="{{ breed.image }}" alt="{{ breed.name }}" class="rounded-3xl w-1/4 object-cover image-square mx-auto"/>
+               <div  class="w-3/4 mt-6 md:mt-0 md:pl-6 mx-auto">
+                   <a href="{% url 'catwiki:detail' breed.id %}"><h2 class="text-lg mb-6">{{ forloop.counter }}. {{ breed.name }}</h2></a>
+                   <p>{{ breed.description }}</p>
+               </div>
+           </div>
+        {% endfor %}
+        {% endwith %}
+        </section>
+    </div>
+</body>
+
+{% endblock %}
+

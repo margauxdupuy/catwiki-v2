@@ -1,0 +1,30 @@
+{
+  "name": "django_tailwind",
+  "description": "",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "npm run build:clean && npm run build:sass && npm run build:postcss && npm run build:cleancss",
+    "build:clean": "rimraf ../static/styles",
+    "build:sass": "node-sass --output-style compressed src/styles/styles.scss ../static/styles/styles.css",
+    "build:postcss": "cross-env NODE_ENV=production postcss --config . --map false --output ../static/styles/styles.css ../static/styles/styles.css",
+    "build:cleancss": "cleancss -o ../static/styles/styles.css ../static/styles/styles.css",
+    "dev": "watch \"npm run dev:sass && npm run dev:postcss\" ./src",
+    "dev:sass": "node-sass --output-style expanded --source-map true src/styles/styles.scss ../static/styles/styles.css",
+    "dev:postcss": "postcss --config . --map true --output ../static/styles/styles.css ../static/styles/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.0.2",
+    "clean-css-cli": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "node-sass": "^5.0.0",
+    "postcss": "^8.1.9",
+    "postcss-cli": "^8.3.0",
+    "postcss-scss": "^3.0.4",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^2.0.1",
+    "watch": "^1.0.2"
+  }
+}

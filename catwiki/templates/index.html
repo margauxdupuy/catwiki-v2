@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%  block content %}
+
+<body class="bg-grey-lightest font-serif leading-normal tracking-normal">
+
+    <div class="container mx-auto">
+        <section class="section-search flex flex-col text-center md:text-left">
+            <h1 class="hidden">Catwiki</h1>
+            <img src="{% static 'images/CatwikiLogo_white.svg' %}" alt="Catwiki Logo" style="width: 300px; height: auto;" />
+            <p class="text-white my-4">Get to know more about your cat breed</p>
+            <form action="/" method="post" class="mt-4">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Discover 🐱 → " class="text-sm mt-6 md:mt-0">
+            </form>
+        </section>
+
+        <section class="section-most-searched bg-gray rounded-b-3xl p-8 md:p-16 mb-6">
+            <span class="text-sm mb-4">Most Searched Breeds</span>
+            <div class="flex flex-col md:flex-row justify-between items-end mt-4 mb-8">
+                <h2 class="text-lg title-underline mb-8 md:mb-0">{{ total_breeds }}+ Breeds For you to discover</h2>
+                <a href="{% url 'catwiki:searched' %}" class="text-sm uppercase text-secondary mb-2">See more <i class="fas fa-long-arrow-alt-right"></i></a>
+            </div>
+
+            <div class="md:grid md:grid-cols-4 gap-8">
+                {% for id, cat in most_searched.items %}
+                    <div class="img-card mb-12 md:mb-0">
+                        <a href="{% url 'catwiki:detail' id %}">
+                            <img src="{{ cat.image_url }}" alt="{{ cat.name }}" class="rounded-3xl w-full object-cover mx-auto sm:mx-0 mb-4 md:mb-6 image-square"/>
+                            <div class="text-center md:text-left">{{ cat.name }}</div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="flex flex-col md:flex-row section-cat-reasons p-8 md:p-16 mb-6">
+            <div class="md:w-5/12 md:pt-16">
+                <h2 class="text-lg title-underline my-6">Why should you have a cat ?</h2>
+                <p class="my-6">Having a cat around you can actually trigger the release of calming chemicals in your body which lower your stress and anxiety leves.</p>
+                <a class="text-sm uppercase text-secondary my-6">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+            </div>
+            <div class="md:w-7/12 flex flex-col md:flex-row mt-8 md:mt-0">
+                <div class="md:w-4/6 md:pl-12 md:pr-8">
+                    <img src="{% static 'images/image 2.png' %}" alt="cat" class="rounded-3xl mb-8"/>
+                    <img src="{% static 'images/image 1.png' %}" alt="cat" class="rounded-3xl mb-8 md:mb-0 md:float-right md:w-1/2"/>
+                </div>
+                <img src="{% static 'images/image 3.png' %}" alt="cat" class="flex-grow-0 md:w-2/6 rounded-3xl" style="height: fit-content;"/>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+{% endblock %}
