@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - .:/opt/catwiki
+    environment:
+      - DJANGO_SETTINGS_MODULE=catwiki.settings.dev
+    command: sh -c "./bin/wait-for-it.sh db:5432 &&
+                    ./manage.py migrate &&
+                    cd ./catwiki_web/static_src &&
+                    npm install &&
+                    ../../manage.py runserver 0.0.0.0:8000"
+  db:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=catwiki
+      - POSTGRES_PASSWORD=catwiki
+      - POSTGRES_DB=catwiki

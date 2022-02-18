@@ -1,0 +1,7 @@
+django
+django-getenv
+dj_database_url
+django_countries
+psycopg2-binary
+django-tailwind
+importlib-metadata<4.3

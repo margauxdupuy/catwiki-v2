@@ -1,9 +1,8 @@
-env/
-app/__pycache__
-catwiki/static_src/node_modules
-catwiki/__pycache__
-/static/
-
+catwiki_web/static_src/node_modules
+catwiki_web/__pycache__
+__pycache__
+*.pyc
+/.coverage
 /tmp
 stderr.log
-local_settings.py
+.htaccess

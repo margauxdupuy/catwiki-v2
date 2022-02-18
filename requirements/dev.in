@@ -1,0 +1,8 @@
+-r base.txt
+
+flake8
+coverage
+pytest-django
+bandit
+factory_boy
+faker-e164
