@@ -51,37 +51,30 @@ class DetailView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         cat_id = kwargs['id_name']
-        cat_obj = Cat.objects.filter(id_name=cat_id, catimage__main_image=True).values('name', 'description',
-                                                                                       'temperament', 'origin',
-                                                                                       'life_span', 'wikipedia_url',
-                                                                                       'adaptability',
-                                                                                       'affection_level',
-                                                                                       'child_friendly', 'grooming',
-                                                                                       'intelligence', 'health_issues',
-                                                                                       'social_needs',
-                                                                                       'stranger_friendly',
-                                                                                       'catimage__url_image')
+        cat_obj = Cat.objects.get(id_name=cat_id)
+
         cat_skills = {
             'skills_str': {
-                'Temperament': cat_obj[0]['temperament'],
-                'Origin': cat_obj[0]['origin'],
-                'Life Span': cat_obj[0]['life_span'] + ' years',
+                'Temperament': cat_obj.temperament,
+                'Origin': cat_obj.origin.name,
+                'Life Span': cat_obj.life_span + ' years',
             },
             'skills_int': {
-                'Adaptability': cat_obj[0]['adaptability'],
-                'Affection level': cat_obj[0]['affection_level'],
-                'Child Friendly': cat_obj[0]['child_friendly'],
-                'Grooming': cat_obj[0]['grooming'],
-                'Intelligence': cat_obj[0]['intelligence'],
-                'Health issues': cat_obj[0]['health_issues'],
-                'Social needs': cat_obj[0]['social_needs'],
-                'Stranger Friendly': cat_obj[0]['stranger_friendly']
+                'Adaptability': cat_obj.adaptability,
+                'Affection level': cat_obj.affection_level,
+                'Child Friendly': cat_obj.child_friendly,
+                'Grooming': cat_obj.grooming,
+                'Intelligence': cat_obj.intelligence,
+                'Health issues': cat_obj.health_issues,
+                'Social needs': cat_obj.social_needs,
+                'Stranger Friendly': cat_obj.stranger_friendly
             }
         }
 
+        main_image = CatImage.objects.get(cat__id_name=cat_id, main_image=True)
         random_images = list(CatImage.objects.filter(cat__id_name=cat_id, main_image=False).values('url_image'))
         shuffle(random_images)
-        return self.render_to_response({'cat': cat_obj[0], 'cat_skills': cat_skills, 'cat_images': random_images})
+        return self.render_to_response({'cat': cat_obj, 'main_image': main_image.url_image, 'cat_skills': cat_skills, 'cat_images': random_images})
 
 
 class SearchedView(TemplateView):
