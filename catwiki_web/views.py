@@ -106,6 +106,16 @@ class SearchedView(TemplateView):
         return self.render_to_response({'most_searched_cats': cats})
 
 
+class WhyCatView(TemplateView):
+    template_name = 'why_cat.html'
+
+    def get(self, request, *args, **kwargs):
+        random_images = list(CatImage.objects.values('url_image'))
+        shuffle(random_images)
+
+        return self.render_to_response({'cats_illustration': random_images[:3]})
+
+
 class FetchDataCatAPIView(TemplateView):
     template_name = 'catapi.html'
 
