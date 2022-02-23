@@ -2,6 +2,7 @@ django
 django-getenv
 dj_database_url
 django_countries
+django_elasticsearch_dsl
 psycopg2-binary
 django-tailwind
 importlib-metadata<4.3

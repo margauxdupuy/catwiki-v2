@@ -8,5 +8,6 @@ urlpatterns = [
     path('searched', views.SearchedView.as_view(), name='searched'),
     path('why-you-should-have-a-cat', views.WhyCatView.as_view(), name='why-cat'),
     path('detail/<str:id_name>/', views.DetailView.as_view(), name='detail'),
-    path('data-catapi', views.FetchDataCatAPIView.as_view(), name='catapi')
+    path('data-catapi', views.FetchDataCatAPIView.as_view(), name='catapi'),
+    path('search', views.SearchResultsView.as_view(), name='search-results')
 ]

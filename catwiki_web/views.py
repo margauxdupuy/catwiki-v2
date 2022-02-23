@@ -6,6 +6,7 @@ from random import shuffle
 from requests import get
 from django.conf import settings
 from catwiki_web.models import Cat, CatImage
+from catwiki_web.document import CatDocument
 
 
 class IndexView(TemplateView):
@@ -26,10 +27,13 @@ class IndexView(TemplateView):
                 'url_image': cat_obj[0]['catimage__url_image']
             }
             cats.append(cat_details)
+        # results = CatDocument.search().filter("term", description="greek")
+        # results_list = results.to_queryset()
 
         context = {
             'most_searched_cats': cats,
-            'cats_name_list': SelectBreedForm()
+            'cats_name_list': SelectBreedForm(),
+            # 'search_results': results_list
         }
         return self.render_to_response(context)
 
@@ -43,6 +47,22 @@ class IndexView(TemplateView):
             form = SelectBreedForm()
 
         return self.render_to_response({'form': form})
+
+
+class SearchResultsView(TemplateView):
+    template_name = 'results_search.html'
+
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('keywords')
+        results = CatDocument.search().filter("term", description=query.lower())
+        results_list = results.to_queryset().values()
+
+        for r in results_list:
+            main_image = CatImage.objects.filter(cat__id_name=r['id_name'], main_image=True).first()
+            main_image = main_image.url_image if main_image else None
+            r['url_image'] = main_image
+
+        return self.render_to_response({'search_results': results_list})
 
 
 class DetailView(TemplateView):
@@ -74,7 +94,10 @@ class DetailView(TemplateView):
         main_image = CatImage.objects.get(cat__id_name=cat_id, main_image=True)
         random_images = list(CatImage.objects.filter(cat__id_name=cat_id, main_image=False).values('url_image'))
         shuffle(random_images)
-        return self.render_to_response({'cat': cat_obj, 'main_image': main_image.url_image, 'cat_skills': cat_skills, 'cat_images': random_images})
+        return self.render_to_response({'cat': cat_obj,
+                                        'main_image': main_image.url_image,
+                                        'cat_skills': cat_skills,
+                                        'cat_images': random_images})
 
 
 class SearchedView(TemplateView):

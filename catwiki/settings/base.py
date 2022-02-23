@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tailwind',
-    'catwiki_web'
+    'catwiki_web',
+    'django_elasticsearch_dsl'
 ]
 
 MIDDLEWARE = [
@@ -131,4 +132,9 @@ LOGGING = {
 
 TAILWIND_APP_NAME = 'catwiki_web'
 
-
+# with docker : hosts = name of the service, can be localhost:9200
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': os.getenv("ELASTICSEARCH_DSL_HOSTS", 'elasticsearch')
+    },
+}

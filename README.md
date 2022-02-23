@@ -8,9 +8,7 @@ Docker - Django - GraohQL - ElasticSearch - Tailwind
 - Dockerise project instead of using virtual environment.
 - Distinction between dev and prod environment.
 - Data are not fetched directly from the API anymore. They are inserted in db to improve performance.
-- Now we create the API and we provide the data (`GraphQL`).
 - A search bar with full-text search has been added (`ElasticSearch`)
-- Tests are implemented for a sustainable code.
 
 
 ## Installation
@@ -70,4 +68,11 @@ docker-compose build
 ```
 docker compose stop
 docker-compose build
+```
+
+### ElasticSearch
+
+To create and populate the Elasticsearch index and mapping use the search_index command: 
+```
+python manage.py search_index --rebuild
 ```
