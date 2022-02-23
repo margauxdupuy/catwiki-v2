@@ -1,7 +1,8 @@
 # CATWIKI project - Version 2
 
 ## Stack technique
-Docker - Django - GraohQL - ElasticSearch - Tailwind
+Docker - Django - Tailwind
+ElasticSearch only on dev, I didn't want to pay for this extra server at my hosting.
 
 ## Changes from version 1
 
