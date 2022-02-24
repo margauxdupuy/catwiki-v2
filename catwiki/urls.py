@@ -20,5 +20,5 @@ admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('catwiki_web.urls'))
+    path('', include('catwiki_web.urls', namespace="catwiki_web"))
 ]

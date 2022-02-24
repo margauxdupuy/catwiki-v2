@@ -1,6 +1,14 @@
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/investirsontemps/catwiki.margauxdupuy.ch"
+PassengerAppRoot "/home/investirsontemps/catwiki-v2.margauxdupuy.ch"
 PassengerBaseURI "/"
-PassengerPython "/home/investirsontemps/virtualenv/catwiki.margauxdupuy.ch/3.7/bin/python3.7"
-PassengerAppLogFile "/home/investirsontemps/logs/catwiki_passenger.log"
+PassengerPython "/home/investirsontemps/virtualenv/catwiki-v2.margauxdupuy.ch/3.7/bin/python3.7"
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv ALLOWED_HOSTS ['catwiki-v2.margauxdupuy.ch', 'www.catwiki-v2.margauxdupuy.ch']
+SetEnv API_KEY 6bccb579-c8f4-43c2-b004-4a32eea347f4
+SetEnv DATABASE_URL 'postgresql://investirsontemps_root:PSunEHvN729aJSEc@localhost/investirsontemps_catwiki'
+SetEnv DEBUG False
+SetEnv SECRET_KEY zmts_de)3&x5cv@c7beo#*mm49wgjy2^m*62ge-%$58!z#33dr
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END

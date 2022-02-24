@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailwind',
     'catwiki_web',
-    'django_elasticsearch_dsl'
+    #'django_elasticsearch_dsl'
 ]
 
 MIDDLEWARE = [
@@ -101,8 +101,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = 'static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = "/home/investirsontemps/catwiki-v2.margauxdupuy.ch/static/"
+#STATICFILES_DIRS = "/home/investirsontemps/catwiki-v2.margauxdupuy.ch/catwiki_web/static/"
 
 
 # Default primary key field type
@@ -132,9 +134,5 @@ LOGGING = {
 
 TAILWIND_APP_NAME = 'catwiki_web'
 
-# with docker : hosts = name of the service, can be localhost:9200
-ELASTICSEARCH_DSL={
-    'default': {
-        'hosts': os.getenv("ELASTICSEARCH_DSL_HOSTS", 'elasticsearch')
-    },
-}
+API_URL = 'https://api.thecatapi.com/v1/'
+API_KEY = env("API_KEY", "fake")
