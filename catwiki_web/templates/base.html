@@ -23,10 +23,10 @@
                 <a href="/"><img src="{% static 'images/CatwikiLogo.svg' %}" alt="Catwiki Logo" /></a>
             </div>
             <div class="px-12 py-8">
-                <form action="{% url 'catwiki_web:search-results' %}" method="get">
+                <form action="{% url 'catwiki_web:search-results' %}" method="get" class="text-right">
                     <input name="keywords" type="text" placeholder="Search...">
                 </form>
-                <span class="text-xs italic">ElasticSearch only on dev, I didn't want to pay for this extra server at my hosting.</span>
+                <span class="text-xs text-gray italic">ElasticSearch only on dev, I didn't want to pay for this extra server at my hosting.</span>
             </div>
         </div>
 	</header>

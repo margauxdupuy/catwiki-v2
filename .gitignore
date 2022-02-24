@@ -1,5 +1,6 @@
 catwiki_web/static_src/node_modules
 catwiki_web/__pycache__
+static/
 __pycache__
 *.pyc
 /.coverage
